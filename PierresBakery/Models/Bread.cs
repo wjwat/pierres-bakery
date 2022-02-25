@@ -25,7 +25,7 @@ namespace PierresBakery.Models
 
     public static void RemoveBreads()
     {
-      // Clear breads
+      _BreadItems.Clear();
     }
   }
 }
