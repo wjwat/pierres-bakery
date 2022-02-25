@@ -4,6 +4,7 @@ namespace PierresBakery.Models
   {
     public string Name { get; init; }
     public int Amount { get; private set; }
+    public int Price { get; }
 
     public Bread(string name, int amount)
     {

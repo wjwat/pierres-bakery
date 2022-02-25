@@ -32,5 +32,16 @@ namespace PierresBakery.Tests
 
       Assert.AreEqual(breadAmount, testBread.Amount);
     }
+
+    [TestMethod]
+    public void BreadPrice_ReturnBreadPrice_Int()
+    {
+      string breadName = "pan francés";
+      int breadAmount = 10;
+      int breadPrice = 5;
+      Bread testBread = new Bread(breadName, breadAmount);
+
+      Assert.AreEqual(breadPrice, testBread.Price);
+    }
   }
 }
