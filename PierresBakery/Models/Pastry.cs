@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace PierresBakery.Models
@@ -29,7 +30,7 @@ namespace PierresBakery.Models
 
     public static int GetCost(int numberOfPastries)
     {
-      return numberOfPastries * Price;
+      return ((numberOfPastries / 3) * 5) + ((numberOfPastries % 3) * Price);
     }
   }
 }

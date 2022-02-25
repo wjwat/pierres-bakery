@@ -11,7 +11,7 @@ namespace PierresBakery.Tests
   public class PastryTests
   {
     string pastryName = "gallina";
-    int pastryAmount = 10;
+    int pastryAmount = 6;
     int pastryPrice = 2;
     Pastry testPastry;
     List<Pastry> emptyPastryList = new List<Pastry>();
@@ -95,9 +95,9 @@ namespace PierresBakery.Tests
     [TestMethod]
     public void PastryGetTotal_ReturnTotalBasedOnValuePassedWithDiscount_Int()
     {
-      int expectedCost = 6;
+      int expectedCost = 10;
 
-      Assert.AreEqual(expectedCost, Pastry.GetCost(10));
+      Assert.AreEqual(expectedCost, Pastry.GetCost(6));
     }
   }
 }
