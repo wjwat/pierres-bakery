@@ -10,8 +10,17 @@ namespace PierresBakery.Tests
     [TestMethod]
     public void BreadConstructor_CreateInstanceOfBread_Bread()
     {
-      Bread x = new Bread();
-      Assert.AreEqual(typeof(Bread), x.GetType());
+      Bread testBread = new Bread("");
+      Assert.AreEqual(typeof(Bread), testBread.GetType());
+    }
+
+    [TestMethod]
+    public void BreadItemName_ReturnBreadItemName_String()
+    {
+      string breadName = "pan francés";
+      Bread testBread = new Bread(breadName);
+
+      Assert.AreEqual(breadName, testBread.Name);
     }
   }
 }
