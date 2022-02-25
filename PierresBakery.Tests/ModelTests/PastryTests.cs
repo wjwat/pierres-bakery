@@ -51,5 +51,13 @@ namespace PierresBakery.Tests
     {
       Assert.AreEqual(pastryPrice, Pastry.Price);
     }
+
+    [TestMethod]
+    public void PastryClearPastries_ClearsPastryListObjects_True()
+    {
+      Pastry.RemovePastries();
+
+      CollectionAssert.AreEqual(emptyPastryList, Pastry.GetPastries());
+    }
   }
 }
