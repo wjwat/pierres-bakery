@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 using PierresBakery.Models;
 
@@ -42,6 +43,14 @@ namespace PierresBakery.Tests
       Bread testBread = new Bread(breadName, breadAmount);
 
       Assert.AreEqual(breadPrice, testBread.Price);
+    }
+
+    [TestMethod]
+    public void BreadGetBreads_ReturnEmptyList_BreadList()
+    {
+      List<Bread> emptyBreadList = new List<Bread>();
+
+      CollectionAssert.AreEqual(emptyBreadList, Bread.GetBreads());
     }
   }
 }
