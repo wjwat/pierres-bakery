@@ -19,9 +19,7 @@ namespace PierresBakery.Models
 
     public static List<Pastry> GetPastries()
     {
-      return new List<Pastry> {
-        new Pastry("fail", 0)
-      };
+      return _PastryItems;
     }
 
     public static void RemovePastries()
