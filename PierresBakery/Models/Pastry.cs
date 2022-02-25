@@ -8,7 +8,7 @@ namespace PierresBakery.Models
     public Pastry(string name, int amount)
     {
       Name = name;
-      // Do something here
+      Amount = amount;
     }
   }
 }
