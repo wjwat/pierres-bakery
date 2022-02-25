@@ -18,7 +18,7 @@ namespace PierresBakery.Models
 
     public static List<Bread> GetBreads()
     {
-      return new List<Bread> { new Bread("Good fail", 10) };
+      return _BreadItems;
     }
   }
 }
