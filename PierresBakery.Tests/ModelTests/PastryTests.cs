@@ -87,7 +87,7 @@ namespace PierresBakery.Tests
     [TestMethod]
     public void PastryGetTotal_ReturnTotalBasedOnValuePassed_Int()
     {
-      int expectedCost = 10;
+      int expectedCost = 4;
 
       Assert.AreEqual(expectedCost, Pastry.GetCost(2));
     }
