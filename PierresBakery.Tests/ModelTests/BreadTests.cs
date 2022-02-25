@@ -52,5 +52,17 @@ namespace PierresBakery.Tests
 
       CollectionAssert.AreEqual(emptyBreadList, Bread.GetBreads());
     }
+
+    [TestMethod]
+    public void BreadGetBreads_ReturnListOfBreads_BreadList()
+    {
+      List<Bread> fullBreadList = new List<Bread> {
+        new Bread("pan francés", 10),
+        new Bread("pan de muerto", 5),
+        new Bread("pan de yema", 7),
+      };
+
+      CollectionAssert.AreEqual(fullBreadList, Bread.GetBreads());
+    }
   }
 }
