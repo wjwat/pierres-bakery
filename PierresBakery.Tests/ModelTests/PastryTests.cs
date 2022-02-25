@@ -45,5 +45,11 @@ namespace PierresBakery.Tests
     {
       Assert.AreEqual(pastryAmount, testPastry.Amount);
     }
+
+    [TestMethod]
+    public void PastryPrice_ReturnPastryPrice_Int()
+    {
+      Assert.AreEqual(pastryPrice, Pastry.Price);
+    }
   }
 }
