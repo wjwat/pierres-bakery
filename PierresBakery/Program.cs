@@ -7,7 +7,7 @@ namespace PierresBakery
 {
   public class Program
   {
-    public static List<Item> Inventory = new List<Item>();
+    public static List<Bread> Inventory = new List<Bread>();
     // public static List<Pastry> DaysPastries = new List<Pastry>();
 
     public static Dictionary<string, string> Messages = 
