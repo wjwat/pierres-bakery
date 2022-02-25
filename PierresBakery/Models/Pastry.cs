@@ -24,7 +24,7 @@ namespace PierresBakery.Models
 
     public static void RemovePastries()
     {
-      // do something here
+      _PastryItems.Clear();
     }
 
   }
