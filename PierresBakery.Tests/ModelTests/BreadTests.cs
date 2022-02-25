@@ -9,6 +9,12 @@ namespace PierresBakery.Tests
   [TestClass]
   public class BreadTests
   {
+    [TestCleanup]
+    public void Cleanup()
+    {
+      Bread.RemoveBreads();
+    }
+
     [TestMethod]
     public void BreadConstructor_CreateInstanceOfBread_Bread()
     {
@@ -64,6 +70,21 @@ namespace PierresBakery.Tests
       };
 
       CollectionAssert.AreEqual(fullBreadList, Bread.GetBreads());
+    }
+
+    [TestMethod]
+    public void BreadClearBreads_ClearsBreadListObjects_True()
+    {
+      List<Bread> fullBreadList = new List<Bread> {
+        new Bread("pan francés", 10),
+        new Bread("pan de muerto", 5),
+        new Bread("pan de yema", 7),
+      };
+      List<Bread> emptyBreadList = new List<Bread>();
+
+      Bread.RemoveBreads();
+
+      CollectionAssert.AreEqual(emptyBreadList, Bread.GetBreads());
     }
   }
 }
