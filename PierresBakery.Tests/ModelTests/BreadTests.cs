@@ -49,7 +49,7 @@ namespace PierresBakery.Tests
       int breadPrice = 5;
       Bread testBread = new Bread(breadName, breadAmount);
 
-      Assert.AreEqual(breadPrice, testBread.Price);
+      Assert.AreEqual(breadPrice, Bread.Price);
     }
 
     [TestMethod]
