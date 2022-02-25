@@ -14,6 +14,8 @@ namespace PierresBakery.Models
       Name = name;
       Amount = amount;
       Price = 5;
+
+      _BreadItems.Add(this);
     }
 
     public static List<Bread> GetBreads()
