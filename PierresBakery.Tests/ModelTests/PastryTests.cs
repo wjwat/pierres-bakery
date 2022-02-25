@@ -59,5 +59,15 @@ namespace PierresBakery.Tests
 
       CollectionAssert.AreEqual(emptyPastryList, Pastry.GetPastries());
     }
+
+    [TestMethod]
+    public void PastryGetPastries_ReturnEmptyList_PastryList()
+    {
+      // In order to DRY up our code we've put some initalizations in the test
+      // Initialize func which means we come into this test with a pastry added.
+      Pastry.RemovePastries();
+
+      CollectionAssert.AreEqual(emptyPastryList, Pastry.GetPastries());
+    }
   }
 }
