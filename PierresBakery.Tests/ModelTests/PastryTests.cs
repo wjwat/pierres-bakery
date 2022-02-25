@@ -12,7 +12,7 @@ namespace PierresBakery.Tests
   {
     string pastryName = "gallina";
     int pastryAmount = 10;
-    int pastryPrice = 5;
+    int pastryPrice = 2;
     Pastry testPastry;
     List<Pastry> emptyPastryList = new List<Pastry>();
 
