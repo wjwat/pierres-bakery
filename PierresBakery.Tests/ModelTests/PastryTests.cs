@@ -83,5 +83,13 @@ namespace PierresBakery.Tests
 
       CollectionAssert.AreEqual(fullPastryList, Pastry.GetPastries());
     }
+
+    [TestMethod]
+    public void PastryGetTotal_ReturnTotalBasedOnValuePassed_Int()
+    {
+      int expectedCost = 10;
+
+      Assert.AreEqual(expectedCost, Pastry.GetCost(2));
+    }
   }
 }
