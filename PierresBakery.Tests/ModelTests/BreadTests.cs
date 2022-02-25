@@ -9,6 +9,19 @@ namespace PierresBakery.Tests
   [TestClass]
   public class BreadTests
   {
+    string breadName = "pan francés";
+    int breadAmount = 10;
+    int breadPrice = 5;
+    Bread testBread;
+    List<Bread> emptyBreadList = new List<Bread>();
+
+
+    [TestInitialize]
+    public void Initialize()
+    {
+      testBread = new Bread(breadName, breadAmount);
+    }
+
     [TestCleanup]
     public void Cleanup()
     {
@@ -18,44 +31,41 @@ namespace PierresBakery.Tests
     [TestMethod]
     public void BreadConstructor_CreateInstanceOfBread_Bread()
     {
-      Bread testBread = new Bread("", 0);
       Assert.AreEqual(typeof(Bread), testBread.GetType());
     }
 
     [TestMethod]
     public void BreadItemName_ReturnBreadItemName_String()
     {
-      string breadName = "pan francés";
-      Bread testBread = new Bread(breadName, 0);
-
       Assert.AreEqual(breadName, testBread.Name);
     }
 
     [TestMethod]
     public void BreadAmount_ReturnBreadAmount_Int()
     {
-      string breadName = "pan francés";
-      int breadAmount = 10;
-      Bread testBread = new Bread(breadName, breadAmount);
-
       Assert.AreEqual(breadAmount, testBread.Amount);
     }
 
     [TestMethod]
     public void BreadPrice_ReturnBreadPrice_Int()
     {
-      string breadName = "pan francés";
-      int breadAmount = 10;
-      int breadPrice = 5;
-      Bread testBread = new Bread(breadName, breadAmount);
-
       Assert.AreEqual(breadPrice, Bread.Price);
+    }
+
+    [TestMethod]
+    public void BreadClearBreads_ClearsBreadListObjects_True()
+    {
+      Bread.RemoveBreads();
+
+      CollectionAssert.AreEqual(emptyBreadList, Bread.GetBreads());
     }
 
     [TestMethod]
     public void BreadGetBreads_ReturnEmptyList_BreadList()
     {
-      List<Bread> emptyBreadList = new List<Bread>();
+      // In order to DRY up our code we've put some initalizations in the test
+      // Initialize func which means we come into this test with a bread added.
+      Bread.RemoveBreads();
 
       CollectionAssert.AreEqual(emptyBreadList, Bread.GetBreads());
     }
@@ -63,6 +73,8 @@ namespace PierresBakery.Tests
     [TestMethod]
     public void BreadGetBreads_ReturnListOfBreads_BreadList()
     {
+      // Same as previous test.
+      Bread.RemoveBreads();
       List<Bread> fullBreadList = new List<Bread> {
         new Bread("pan francés", 10),
         new Bread("pan de muerto", 5),
@@ -70,21 +82,6 @@ namespace PierresBakery.Tests
       };
 
       CollectionAssert.AreEqual(fullBreadList, Bread.GetBreads());
-    }
-
-    [TestMethod]
-    public void BreadClearBreads_ClearsBreadListObjects_True()
-    {
-      List<Bread> fullBreadList = new List<Bread> {
-        new Bread("pan francés", 10),
-        new Bread("pan de muerto", 5),
-        new Bread("pan de yema", 7),
-      };
-      List<Bread> emptyBreadList = new List<Bread>();
-
-      Bread.RemoveBreads();
-
-      CollectionAssert.AreEqual(emptyBreadList, Bread.GetBreads());
     }
 
     [TestMethod]
