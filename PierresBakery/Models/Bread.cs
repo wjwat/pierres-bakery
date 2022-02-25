@@ -10,6 +10,7 @@ namespace PierresBakery.Models
     {
       Name = name;
       Amount = amount;
+      Price = 5;
     }
   }
 }
