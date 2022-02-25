@@ -27,5 +27,10 @@ namespace PierresBakery.Models
     {
       _BreadItems.Clear();
     }
+
+    public static int GetCost(int numberOfBreads)
+    {
+      return numberOfBreads;
+    }
   }
 }

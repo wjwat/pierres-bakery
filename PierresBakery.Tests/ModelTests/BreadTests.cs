@@ -86,5 +86,13 @@ namespace PierresBakery.Tests
 
       CollectionAssert.AreEqual(emptyBreadList, Bread.GetBreads());
     }
+
+    [TestMethod]
+    public void BreadGetTotal_ReturnTotalBasedOnValuePassed_Int()
+    {
+      int expectedCost = 10;
+
+      Assert.AreEqual(expectedCost, Bread.GetCost(2));
+    }
   }
 }
