@@ -7,10 +7,10 @@ namespace PierresBakery
 {
   public class Program
   {
-    public static List<Bread> Inventory = new List<Bread>();
-    // public static List<Pastry> DaysPastries = new List<Pastry>();
+    private static List<Bread> DaysBread = new List<Bread>();
+    private static List<Pastry> DaysPastries = new List<Pastry>();
 
-    public static Dictionary<string, string> Messages = 
+    private static Dictionary<string, string> Messages = 
       new Dictionary<string, string>()
       {
         { "welcome", "Welcome to Pierre's Bakery\n\n" +
@@ -19,48 +19,49 @@ namespace PierresBakery
         { "goodbye", "Goodbye!" }
       };
 
-    public static void BuildBakery()
+    private static void BuildBakery()
     {
-      Inventory.AddRange(new List<Bread> {
+      DaysBread.AddRange(new List<Bread> {
         new Bread("pan francés", 10),
         new Bread("pan de muerto", 5),
         new Bread("pan de yema", 7),
       });
-      // DaysPastries.AddRange(new List<Pastry> {
-      //   new Pastry("concha", 15),
-      //   new Pastry("gallina", 20),
-      //   new Pastry("empanada (pumpkin)", 8),
-      // });
+      DaysPastries.AddRange(new List<Pastry> {
+        new Pastry("concha", 15),
+        new Pastry("gallina", 20),
+        new Pastry("empanada (pumpkin)", 8),
+      });
     }
 
-    public static string DisplayOptions(string message)
+    private static void DisplayOptions()
     {
-      for (int i = 0; i < Inventory.Count; i++)
+      for (int i = 0; i < DaysBread.Count; i++)
       {
-        string x = "".PadLeft(8) + $"[{i}] {Inventory[i].Name} ({Inventory[i].Amount})";
+        string x = "".PadLeft(8) + $"[{i}] {DaysBread[i].Name} ({DaysBread[i].Amount})";
         Console.WriteLine(x);
       }
-
-    //   Console.WriteLine("Pastries:".PadLeft(10));
-    //   for (int i = 0; i < DaysPastries.Count; i++)
-    //   {
-    //     int z = i+DaysBread.Count;
-    //     string x = "".PadLeft(8) + $"[{z}] {DaysPastries[i].Name} ({DaysPastries[i].Amount})";
-    //     Console.WriteLine(x);
-    //   }
-
-      Console.Write(message);
-
-      return Console.ReadLine();
+      for (int i = 0, z = DaysBread.Count; i < DaysPastries.Count; i++)
+      {
+        string x = "".PadLeft(8) + $"[{i+z}] {DaysPastries[i].Name} ({DaysPastries[i].Amount})";
+        Console.WriteLine(x);
+      }
     }
 
-    public static Dictionary<string, int> ParseSelection(
-      string sel,
-      Dictionary<string, int> Order)
+    private static Dictionary<string, int> ParseUserSelection(
+      Dictionary<string, int> Order,
+      string choice,
+      string amount)
     {
-      if (sel[0] != 'B' || sel[0] != 'P')
+      int c = int.Parse(choice);
+      int a = int.Parse(amount);
+
+      if (a > DaysBread.Count)
       {
-        Console.WriteLine("ERROR: Please enter a valid selection.");
+        Order[DaysPastries[c].Name] = a;
+      }
+      else
+      {
+        Order[DaysBread[c].Name] = a;
       }
       return Order;
     }
@@ -72,8 +73,18 @@ namespace PierresBakery
       Console.WriteLine(Messages["welcome"]);
       while (true)
       {
-        string sel = DisplayOptions("\nWhat item would you like? >>> ");
-        Order = ParseSelection(sel.ToUpper(), Order);
+        DisplayOptions();
+        Console.Write("\nWhat item would you like? >>> ");
+        string choice = Console.ReadLine();
+        Console.Write("And how many would you like? >>> ");
+        string amount = Console.ReadLine();
+        Order = ParseUserSelection(Order, choice, amount);
+
+        break;
+      }
+      foreach (var key in Order.Keys)
+      {
+          System.Console.WriteLine("{0}: {1}", key, String.Join(", ", Order[key]));
       }
       Console.WriteLine(Messages["goodbye"].PadLeft(72, '.'));
     }
