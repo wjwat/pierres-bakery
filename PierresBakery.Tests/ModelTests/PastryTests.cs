@@ -91,5 +91,13 @@ namespace PierresBakery.Tests
 
       Assert.AreEqual(expectedCost, Pastry.GetCost(2));
     }
+
+    [TestMethod]
+    public void PastryGetTotal_ReturnTotalBasedOnValuePassedWithDiscount_Int()
+    {
+      int expectedCost = 6;
+
+      Assert.AreEqual(expectedCost, Pastry.GetCost(10));
+    }
   }
 }
