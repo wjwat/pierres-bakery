@@ -33,5 +33,11 @@ namespace PierresBakery.Tests
     {
       Assert.AreEqual(typeof(Pastry), testPastry.GetType());
     }
+
+    [TestMethod]
+    public void PastryItemName_ReturnPastryItemName_String()
+    {
+      Assert.AreEqual(pastryName, testPastry.Name);
+    }
   }
 }
