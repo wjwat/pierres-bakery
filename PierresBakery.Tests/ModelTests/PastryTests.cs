@@ -69,5 +69,19 @@ namespace PierresBakery.Tests
 
       CollectionAssert.AreEqual(emptyPastryList, Pastry.GetPastries());
     }
+
+    [TestMethod]
+    public void PastryGetPastries_ReturnListOfPastries_PastryList()
+    {
+      // Same as previous test.
+      Pastry.RemovePastries();
+      List<Pastry> fullPastryList = new List<Pastry> {
+        new Pastry("pan francés", 10),
+        new Pastry("pan de muerto", 5),
+        new Pastry("pan de yema", 7),
+      };
+
+      CollectionAssert.AreEqual(fullPastryList, Pastry.GetPastries());
+    }
   }
 }
