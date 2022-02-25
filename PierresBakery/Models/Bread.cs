@@ -29,7 +29,7 @@ namespace PierresBakery.Models
 
     public static int GetCost(int numberOfBreads)
     {
-      return numberOfBreads * Price;
+      return (numberOfBreads - (numberOfBreads / 3)) * Price;
     }
   }
 }

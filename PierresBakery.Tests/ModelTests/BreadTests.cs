@@ -98,9 +98,9 @@ namespace PierresBakery.Tests
     [TestMethod]
     public void BreadGetTotal_ReturnTotalBasedOnValuePassedWithDiscount_Int()
     {
-      int expectedCost = 10;
+      int expectedCost = 40;
 
-      Assert.AreEqual(expectedCost, Bread.GetCost(3));
+      Assert.AreEqual(expectedCost, Bread.GetCost(11));
     }
   }
 }
