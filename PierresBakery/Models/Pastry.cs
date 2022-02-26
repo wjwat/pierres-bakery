@@ -38,6 +38,7 @@ namespace PierresBakery.Models
       {
         if (pastry.Name == name)
         {
+          pastry.Amount -= amount;
           return true;
         }
       }
