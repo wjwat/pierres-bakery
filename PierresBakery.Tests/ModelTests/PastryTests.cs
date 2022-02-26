@@ -101,15 +101,26 @@ namespace PierresBakery.Tests
     }
 
     [TestMethod]
-    public void PastrySellPastry_ReturnTrueIfPastryExists_Bool()
+    public void PastrySellPastry_ReturnTrueIfPastryExists_True()
     {
       Assert.AreEqual(true, Pastry.SellPastry(pastryName, pastryAmount));
     }
 
     [TestMethod]
-    public void PastrySellPastry_ReturnFalseIfPastryDoesNotExist_Bool()
+    public void PastrySellPastry_ReturnFalseIfPastryDoesNotExist_False()
     {
       Assert.AreEqual(false, Pastry.SellPastry("hello", pastryAmount));
+    }
+
+    [TestMethod]
+    public void PastrySellPastry_ModifyPastryAmount_True()
+    {
+      Pastry newTestPastry = new Pastry("test", 10);
+      int sellAmount = 6;
+      int expectedAmount = 4;
+      Pastry.SellPastry("test", sellAmount);
+
+      Assert.AreEqual(expectedAmount, newTestPastry.Amount);
     }
   }
 }
