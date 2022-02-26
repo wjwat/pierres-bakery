@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using PierresBakery.Models;
 
@@ -55,11 +56,20 @@ namespace PierresBakery
       Console.WriteLine("  $5/ea for Bread, and $2/ea for Pastries");
       for (int i = 0; i < DaysBread.Count; i++)
       {
-        Console.WriteLine($"    [{i}] {DaysBread[i].Name} ({DaysBread[i].Amount})");
+        if (DaysBread[i].Amount == 0)
+        {
+          continue;
+        }
+        Console.WriteLine("{0,7} {1} ({2}x)", "["+i+"]", DaysBread[i].Name, DaysBread[i].Amount);
       }
       for (int i = 0, z = DaysBread.Count; i < DaysPastries.Count; i++)
       {
-        Console.WriteLine($"    [{i+z}] {DaysPastries[i].Name} ({DaysPastries[i].Amount})");
+        if (DaysPastries[i].Amount == 0)
+        {
+          continue;
+        }
+        int y = i+z;
+        Console.WriteLine("{0,7} {1} ({2}x)", "["+y+"]", DaysPastries[i].Name, DaysPastries[i].Amount);
       }
     }
 
@@ -71,7 +81,7 @@ namespace PierresBakery
       bool cTest = int.TryParse(choice, out int c);
       bool aTest = int.TryParse(amount, out int a);
 
-      if (!cTest || !aTest || c < 0 || a < 0)
+      if (!cTest || !aTest || c < 0 || a < 1)
       {
         Console.WriteLine("PIERRE: You aren't making any sense right now!\n");
         return Order;
@@ -113,19 +123,38 @@ namespace PierresBakery
       return Order;
     }
 
-    public static void DisplayOrderTotal(Dictionary<string, int> Order)
+    private static void DisplayOrderTotal(Dictionary<string, int> Order)
     {
+      int fullTotal = 0;
+
       Console.Write("\n");
-      System.Console.WriteLine("{0,4}  {1,-20}  {2}", "Count", "Item Name", "Total");
+      Console.WriteLine("{0,4}  {1,-20}  {2}", "Count", "Item Name", "Total");
       foreach (var key in Order.Keys)
       {
-        if (key == "_total") { continue; }
-        System.Console.WriteLine("{0,4}x  {1,-20}  ${2}", Order[key], key, Pastry.GetCost(Order[key]));
+        if (key == "_total")
+        {
+          continue;
+        }
+        if (IsItemBread(key))
+        {
+          fullTotal += Order[key] * Bread.Price;
+          Console.WriteLine("{0,4}x  {1,-20}  ${2}", Order[key], key, Bread.GetCost(Order[key]));
+        }
+        else
+        {
+          fullTotal += Order[key] * Pastry.Price;
+          Console.WriteLine("{0,4}x  {1,-20}  ${2}", Order[key], key, Pastry.GetCost(Order[key]));
+        }
       }
-      Console.Write("\n");
       Console.WriteLine("".PadLeft(35, '-'));
-      Console.WriteLine("{0,31}", "Total: $"+Order["_total"]);
+      Console.WriteLine("{0,32}", "Full Price: $"+fullTotal);
+      Console.WriteLine("{0,32}", "w/ Discount: $"+Order["_total"]);
       Console.Write("\n");
+    }
+
+    private static bool IsItemBread(string name)
+    {
+      return Bread.GetBreads().Any(item => item.Name == name);
     }
 
     public static void Main()
