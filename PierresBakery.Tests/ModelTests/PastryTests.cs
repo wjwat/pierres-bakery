@@ -122,5 +122,14 @@ namespace PierresBakery.Tests
 
       Assert.AreEqual(expectedAmount, newTestPastry.Amount);
     }
+
+    [TestMethod]
+    public void PastrySellPastry_SellAmountExceedsNumberOfPastries_False()
+    {
+      Pastry newTestPastry = new Pastry("test", 10);
+      int sellAmount = 11;
+
+      Assert.AreEqual(false, Pastry.SellPastry("test", sellAmount));
+    }
   }
 }
