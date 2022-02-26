@@ -31,5 +31,23 @@ namespace PierresBakery.Models
     {
       return (numberOfBreads - (numberOfBreads / 3)) * Price;
     }
+
+    public static int SellBread(string name, int amount)
+    {
+      return -1;
+    }
+
+    // public static bool SellBread(string name, int amount)
+    // {
+    //   foreach(Bread bread in _BreadItems)
+    //   {
+    //     if (bread.Name == name && bread.Amount >= amount)
+    //     {
+    //       bread.Amount -= amount;
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // }
   }
 }

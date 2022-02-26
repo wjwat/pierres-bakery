@@ -100,5 +100,37 @@ namespace PierresBakery.Tests
 
       Assert.AreEqual(expectedCost, Bread.GetCost(11));
     }
+
+    [TestMethod]
+    public void BreadSellBread_ReturnTrueIfBreadExists_True()
+    {
+      Assert.AreEqual(true, Bread.SellBread(breadName, breadAmount));
+    }
+
+    [TestMethod]
+    public void BreadSellBread_ReturnFalseIfBreadDoesNotExist_False()
+    {
+      Assert.AreEqual(false, Bread.SellBread("hello", breadAmount));
+    }
+
+    [TestMethod]
+    public void BreadSellBread_ModifyBreadAmount_True()
+    {
+      Bread newTestBread = new Bread("test", 10);
+      int sellAmount = 6;
+      int expectedAmount = 4;
+      Bread.SellBread("test", sellAmount);
+
+      Assert.AreEqual(expectedAmount, newTestBread.Amount);
+    }
+
+    [TestMethod]
+    public void BreadSellBread_SellAmountExceedsNumberOfPastries_False()
+    {
+      Bread newTestBread = new Bread("test", 10);
+      int sellAmount = 11;
+
+      Assert.AreEqual(false, Bread.SellBread("test", sellAmount));
+    }
   }
 }
