@@ -41,7 +41,7 @@ namespace PierresBakery.Models
           return true;
         }
       }
-      return true;
+      return false;
     }
   }
 }
