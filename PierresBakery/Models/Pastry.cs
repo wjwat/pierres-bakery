@@ -36,7 +36,7 @@ namespace PierresBakery.Models
     {
       foreach(Pastry pastry in _PastryItems)
       {
-        if (pastry.Name == name)
+        if (pastry.Name == name && pastry.Amount >= amount)
         {
           pastry.Amount -= amount;
           return true;
