@@ -25,7 +25,7 @@ namespace PierresBakery.Tests
     [TestCleanup]
     public void Cleanup()
     {
-      // do nothing for now
+      Pastry.RemovePastries();
     }
 
     [TestMethod]
@@ -98,6 +98,12 @@ namespace PierresBakery.Tests
       int expectedCost = 10;
 
       Assert.AreEqual(expectedCost, Pastry.GetCost(6));
+    }
+
+    [TestMethod]
+    public void PastrySellPastry_ReturnTrueIfPastryExists_Bool()
+    {
+      Assert.AreEqual(true, Pastry.SellPastry(pastryName, pastryAmount));
     }
   }
 }

@@ -76,18 +76,29 @@ namespace PierresBakery
       while (true)
       {
         DisplayOptions();
+        Console.WriteLine("\n\tType 'Q' to exit!");
+        Console.WriteLine("\tType 'F' to finish your order!");
         Console.Write("\nWhat item would you like? >>> ");
         string choice = Console.ReadLine();
+
+        if (choice == "q" || choice == "Q")
+        {
+          return;
+        }
+        if (choice == "f" || choice == "F")
+        {
+          break;
+        }
+
         Console.Write("And how many would you like? >>> ");
         string amount = Console.ReadLine();
-        Order = ParseUserSelection(Order, choice, amount);
 
-        break;
+        Order = ParseUserSelection(Order, choice, amount);
       }
       foreach (var key in Order.Keys)
       {
         if (key == "_total") { continue; }
-        System.Console.WriteLine("{0}: {1}", key, String.Join(", ", Order[key]));
+        System.Console.WriteLine("{0}x {1}: ${2}", Order[key], key, Bread.GetCost(Order[key]));
       }
       Console.WriteLine("Total: ${0}", Order["_total"]);
       Console.WriteLine(Messages["goodbye"].PadLeft(72, '.'));
