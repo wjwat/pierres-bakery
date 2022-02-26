@@ -58,17 +58,19 @@ namespace PierresBakery
       if (a > DaysBread.Count)
       {
         Order[DaysPastries[c].Name] = a;
+        Order["_total"] += Bread.GetCost(a);
       }
       else
       {
         Order[DaysBread[c].Name] = a;
+        Order["_total"] += Pastry.GetCost(a);
       }
       return Order;
     }
 
     public static void Main()
     {
-      var Order = new Dictionary<string, int>();
+      var Order = new Dictionary<string, int>() { { "_total", 0 } };
       BuildBakery();
       Console.WriteLine(Messages["welcome"]);
       while (true)
@@ -84,8 +86,10 @@ namespace PierresBakery
       }
       foreach (var key in Order.Keys)
       {
-          System.Console.WriteLine("{0}: {1}", key, String.Join(", ", Order[key]));
+        if (key == "_total") { continue; }
+        System.Console.WriteLine("{0}: {1}", key, String.Join(", ", Order[key]));
       }
+      Console.WriteLine("Total: ${0}", Order["_total"]);
       Console.WriteLine(Messages["goodbye"].PadLeft(72, '.'));
     }
   }
