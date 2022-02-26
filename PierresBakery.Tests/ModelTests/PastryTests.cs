@@ -105,5 +105,11 @@ namespace PierresBakery.Tests
     {
       Assert.AreEqual(true, Pastry.SellPastry(pastryName, pastryAmount));
     }
+
+    [TestMethod]
+    public void PastrySellPastry_ReturnFalseIfPastryDoesNotExist_Bool()
+    {
+      Assert.AreEqual(false, Pastry.SellPastry("hello", pastryAmount));
+    }
   }
 }
