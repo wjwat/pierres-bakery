@@ -29,7 +29,8 @@ Against his better judgement Pierre has decided to join the rest of us in the 21
   terminal](https://www.freecodecamp.org/news/how-you-can-be-more-productive-right-now-using-bash-29a976fb1ab4/)
   navigate to the directory where you have cloned this repo.
 - Run `dotnet build PierresBakery` in the top level directory of the repo
-- Run `dotnet run PierresBakery` to try the program out!
+- Run `dotnet run --project PierresBakery` to try the program out
+- Run `dotnet test PierresBakery.Tests` to run the tests
 
 ## :world_map: Roadmap
 
