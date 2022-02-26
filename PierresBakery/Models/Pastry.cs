@@ -34,6 +34,13 @@ namespace PierresBakery.Models
 
     public static bool SellPastry(string name, int amount)
     {
+      foreach(Pastry pastry in _PastryItems)
+      {
+        if (pastry.Name == name)
+        {
+          return true;
+        }
+      }
       return false;
     }
   }
