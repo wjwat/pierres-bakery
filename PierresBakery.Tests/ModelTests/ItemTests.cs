@@ -60,5 +60,19 @@ namespace PierresBakery.Tests
       testItem.Sell(itemAmount+1);
       Assert.AreEqual(itemAmount, testItem.Amount);
     }
+
+    [TestMethod]
+    public void ItemSell_SellMethodReturnsTrueOnSuccess_bool()
+    {
+      bool result = testItem.Sell(sellAmount);
+      Assert.AreEqual(true, result);
+    }
+
+    [TestMethod]
+    public void ItemSell_SellMethodReturnsFalseOnFailure_bool()
+    {
+      bool result = testItem.Sell(itemAmount+1);
+      Assert.AreEqual(false, result);
+    }
   }
 }

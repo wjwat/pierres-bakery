@@ -15,11 +15,16 @@ namespace PierresBakery.Models
       Price = 0;
     }
 
-    public void Sell(int amount)
+    public bool Sell(int amount)
     {
       if (amount <= Amount)
       {
         Amount -= amount;
+        return true;
+      }
+      else
+      {
+        return false;
       }
     }
   }
