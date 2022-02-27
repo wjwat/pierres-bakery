@@ -14,5 +14,10 @@ namespace PierresBakery.Models
       Amount = amount;
       Price = 0;
     }
+
+    public void Sell(int amount)
+    {
+      // Sell some items
+    }
   }
 }

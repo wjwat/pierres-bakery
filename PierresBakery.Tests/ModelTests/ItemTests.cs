@@ -13,6 +13,8 @@ namespace PierresBakery.Tests
     Item testItem;
     string itemName = "Test Item";
     int itemAmount = 10;
+    int sellAmount = 5;
+    int totalLeft = 5;
 
     [TestInitialize]
     public void Initialize()
@@ -43,6 +45,13 @@ namespace PierresBakery.Tests
     {
       var result = testItem.GetType().GetProperty("Price") != null;
       Assert.AreEqual(true, result);
+    }
+
+    [TestMethod]
+    public void ItemSell_SellMethodCorrectlyChanges_Int()
+    {
+      testItem.Sell(sellAmount);
+      Assert.AreEqual(totalLeft, testItem.Amount);
     }
   }
 }
