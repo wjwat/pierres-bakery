@@ -6,11 +6,13 @@ namespace PierresBakery.Models
   {
     public string Name { get; init; }
     public int Amount { get; private set; }
+    public int Price { get; init; }
 
     public Item(string name, int amount)
     {
       Name = name;
       Amount = amount;
+      Price = 0;
     }
   }
 }
