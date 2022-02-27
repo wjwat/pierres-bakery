@@ -37,5 +37,12 @@ namespace PierresBakery.Tests
     {
       Assert.AreEqual(itemAmount, testItem.Amount);
     }
+
+    [TestMethod]
+    public void ItemPrice_CheckItemHasPriceProperty_True()
+    {
+      var result = testItem.GetType().GetProperty("Price") != null;
+      Assert.AreEqual(true, result);
+    }
   }
 }
