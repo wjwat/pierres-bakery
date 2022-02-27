@@ -6,7 +6,7 @@ namespace PierresBakery.Models
   {
     public string Name { get; init; }
     public int Amount { get; private set; }
-    public static int Price = 0;
+    public static readonly int Price = 0;
 
     public Item(string name, int amount)
     {

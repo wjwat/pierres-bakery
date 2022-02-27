@@ -10,23 +10,16 @@ namespace PierresBakery.Tests
   [TestClass]
   public class BreadTests
   {
-    string breadName = "pan francés";
-    int breadAmount = 10;
-    int breadPrice = 5;
+    string breadName = "gallina";
+    int breadAmount = 6;
+    int breadPrice = 2;
     Bread testBread;
     List<Bread> emptyBreadList = new List<Bread>();
-
 
     [TestInitialize]
     public void Initialize()
     {
       testBread = new Bread(breadName, breadAmount);
-    }
-
-    [TestCleanup]
-    public void Cleanup()
-    {
-      Bread.RemoveBreads();
     }
 
     [TestMethod]
@@ -54,63 +47,25 @@ namespace PierresBakery.Tests
     }
 
     [TestMethod]
-    public void BreadClearBreads_ClearsBreadListObjects_True()
-    {
-      Bread.RemoveBreads();
-
-      CollectionAssert.AreEqual(emptyBreadList, Bread.GetBreads());
-    }
-
-    [TestMethod]
-    public void BreadGetBreads_ReturnEmptyList_BreadList()
-    {
-      // In order to DRY up our code we've put some initalizations in the test
-      // Initialize func which means we come into this test with a bread added.
-      Bread.RemoveBreads();
-
-      CollectionAssert.AreEqual(emptyBreadList, Bread.GetBreads());
-    }
-
-    [TestMethod]
-    public void BreadGetBreads_ReturnListOfBreads_BreadList()
-    {
-      // Same as previous test.
-      Bread.RemoveBreads();
-      List<Bread> fullBreadList = new List<Bread> {
-        new Bread("pan francés", 10),
-        new Bread("pan de muerto", 5),
-        new Bread("pan de yema", 7),
-      };
-
-      CollectionAssert.AreEqual(fullBreadList, Bread.GetBreads());
-    }
-
-    [TestMethod]
     public void BreadGetTotal_ReturnTotalBasedOnValuePassed_Int()
     {
-      int expectedCost = 10;
+      int expectedCost = 4;
 
-      Assert.AreEqual(expectedCost, Bread.GetCost(2));
+      Assert.AreEqual(expectedCost, Bread.Cost(2));
     }
 
     [TestMethod]
     public void BreadGetTotal_ReturnTotalBasedOnValuePassedWithDiscount_Int()
     {
-      int expectedCost = 40;
+      int expectedCost = 10;
 
-      Assert.AreEqual(expectedCost, Bread.GetCost(11));
+      Assert.AreEqual(expectedCost, Bread.Cost(6));
     }
 
     [TestMethod]
     public void BreadSellBread_ReturnTrueIfBreadExists_True()
     {
-      Assert.AreEqual(true, Bread.SellBread(breadName, breadAmount));
-    }
-
-    [TestMethod]
-    public void BreadSellBread_ReturnFalseIfBreadDoesNotExist_False()
-    {
-      Assert.AreEqual(false, Bread.SellBread("hello", breadAmount));
+      Assert.AreEqual(true, testBread.Sell(breadAmount));
     }
 
     [TestMethod]
@@ -119,7 +74,7 @@ namespace PierresBakery.Tests
       Bread newTestBread = new Bread("test", 10);
       int sellAmount = 6;
       int expectedAmount = 4;
-      Bread.SellBread("test", sellAmount);
+      newTestBread.Sell(sellAmount);
 
       Assert.AreEqual(expectedAmount, newTestBread.Amount);
     }
@@ -130,7 +85,7 @@ namespace PierresBakery.Tests
       Bread newTestBread = new Bread("test", 10);
       int sellAmount = 11;
 
-      Assert.AreEqual(false, Bread.SellBread("test", sellAmount));
+      Assert.AreEqual(false, newTestBread.Sell(sellAmount));
     }
   }
 }
