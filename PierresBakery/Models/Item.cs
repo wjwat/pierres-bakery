@@ -6,13 +6,12 @@ namespace PierresBakery.Models
   {
     public string Name { get; init; }
     public int Amount { get; private set; }
-    public int Price { get; init; }
+    public static int Price = 0;
 
     public Item(string name, int amount)
     {
       Name = name;
       Amount = amount;
-      Price = 0;
     }
 
     public bool Sell(int amount)
@@ -26,6 +25,11 @@ namespace PierresBakery.Models
       {
         return false;
       }
+    }
+
+    public static int Cost(int amount)
+    {
+      return amount * Price;
     }
   }
 }
