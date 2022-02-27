@@ -12,6 +12,7 @@ namespace PierresBakery.Tests
   {
     Item testItem;
     string itemName = "Test Item";
+    int itemAmount = 10;
 
     [TestInitialize]
     public void Initialize()
@@ -29,6 +30,12 @@ namespace PierresBakery.Tests
     public void ItemItemName_ReturnItemItemName_String()
     {
       Assert.AreEqual(itemName, testItem.Name);
+    }
+
+    [TestMethod]
+    public void ItemAmount_ReturnItemAmount_Int()
+    {
+      Assert.AreEqual(itemAmount, testItem.Amount);
     }
   }
 }
