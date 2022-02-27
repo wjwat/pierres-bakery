@@ -11,6 +11,7 @@ namespace PierresBakery.Tests
   public class ItemTests
   {
     Item testItem;
+    string itemName = "Test Item";
 
     [TestInitialize]
     public void Initialize()
@@ -22,6 +23,12 @@ namespace PierresBakery.Tests
     public void ItemConstructor_CreateInstanceOfItem_Item()
     {
       Assert.AreEqual(typeof(Item), testItem.GetType());
+    }
+
+    [TestMethod]
+    public void ItemItemName_ReturnItemItemName_String()
+    {
+      Assert.AreEqual(itemName, testItem.Name);
     }
   }
 }
