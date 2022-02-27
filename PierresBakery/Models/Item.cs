@@ -17,7 +17,7 @@ namespace PierresBakery.Models
 
     public void Sell(int amount)
     {
-      // Sell some items
+      Amount -= amount;
     }
   }
 }
