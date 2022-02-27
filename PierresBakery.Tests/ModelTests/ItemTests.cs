@@ -53,5 +53,12 @@ namespace PierresBakery.Tests
       testItem.Sell(sellAmount);
       Assert.AreEqual(totalLeft, testItem.Amount);
     }
+
+    [TestMethod]
+    public void ItemSell_SellMethodOnlySellsMaxAmount_Int()
+    {
+      testItem.Sell(itemAmount+1);
+      Assert.AreEqual(itemAmount, testItem.Amount);
+    }
   }
 }
