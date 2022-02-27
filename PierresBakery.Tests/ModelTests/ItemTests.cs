@@ -16,7 +16,7 @@ namespace PierresBakery.Tests
     [TestInitialize]
     public void Initialize()
     {
-      testItem = new Item();
+      testItem = new Item(itemName);
     }
 
     [TestMethod]

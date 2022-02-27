@@ -6,9 +6,9 @@ namespace PierresBakery.Models
   {
     public string Name { get; init; }
 
-    public Item()
+    public Item(string name)
     {
-      // Do things.
+      Name = name;
     }
   }
 }
