@@ -1,17 +1,16 @@
-using System.Collections.Generic;
-
 namespace PierresBakery.Models
 {
   public class Item
   {
     public string Name { get; init; }
     public int Amount { get; private set; }
-    public static readonly int Price = 0;
+    public virtual int Price { get; init; }
 
     public Item(string name, int amount)
     {
       Name = name;
       Amount = amount;
+      Price = 0;
     }
 
     public bool Sell(int amount)
@@ -27,9 +26,6 @@ namespace PierresBakery.Models
       }
     }
 
-    public static int Cost(int amount)
-    {
-      return amount * Price;
-    }
+    public virtual int Cost(int amount) { return 0; }
   }
 }

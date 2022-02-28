@@ -43,7 +43,7 @@ namespace PierresBakery.Tests
     [TestMethod]
     public void PastryPrice_ReturnPastryPrice_Int()
     {
-      Assert.AreEqual(pastryPrice, Pastry.Price);
+      Assert.AreEqual(pastryPrice, testPastry.Price);
     }
 
     [TestMethod]
@@ -51,7 +51,7 @@ namespace PierresBakery.Tests
     {
       int expectedCost = 4;
 
-      Assert.AreEqual(expectedCost, Pastry.Cost(2));
+      Assert.AreEqual(expectedCost, testPastry.Cost(2));
     }
 
     [TestMethod]
@@ -59,7 +59,7 @@ namespace PierresBakery.Tests
     {
       int expectedCost = 10;
 
-      Assert.AreEqual(expectedCost, Pastry.Cost(6));
+      Assert.AreEqual(expectedCost, testPastry.Cost(6));
     }
 
     [TestMethod]

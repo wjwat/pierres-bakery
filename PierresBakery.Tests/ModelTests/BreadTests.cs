@@ -12,7 +12,7 @@ namespace PierresBakery.Tests
   {
     string breadName = "gallina";
     int breadAmount = 6;
-    int breadPrice = 2;
+    int breadPrice = 5;
     Bread testBread;
     List<Bread> emptyBreadList = new List<Bread>();
 
@@ -43,23 +43,23 @@ namespace PierresBakery.Tests
     [TestMethod]
     public void BreadPrice_ReturnBreadPrice_Int()
     {
-      Assert.AreEqual(breadPrice, Bread.Price);
+      Assert.AreEqual(breadPrice, testBread.Price);
     }
 
     [TestMethod]
     public void BreadGetTotal_ReturnTotalBasedOnValuePassed_Int()
     {
-      int expectedCost = 4;
+      int expectedCost = 10;
 
-      Assert.AreEqual(expectedCost, Bread.Cost(2));
+      Assert.AreEqual(expectedCost, testBread.Cost(2));
     }
 
     [TestMethod]
     public void BreadGetTotal_ReturnTotalBasedOnValuePassedWithDiscount_Int()
     {
-      int expectedCost = 10;
+      int expectedCost = 20;
 
-      Assert.AreEqual(expectedCost, Bread.Cost(6));
+      Assert.AreEqual(expectedCost, testBread.Cost(6));
     }
 
     [TestMethod]

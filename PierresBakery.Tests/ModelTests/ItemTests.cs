@@ -43,7 +43,7 @@ namespace PierresBakery.Tests
     [TestMethod]
     public void ItemPrice_CheckItemHasPriceProperty_True()
     {
-      Assert.AreEqual(0, Item.Price);
+      Assert.AreEqual(0, testItem.Price);
     }
 
     [TestMethod]
@@ -77,7 +77,7 @@ namespace PierresBakery.Tests
     [TestMethod]
     public void ItemCost_CostMethodReturnsCostOfItemsPassedIn_Int()
     {
-      int cost = Item.Cost(itemAmount);
+      int cost = testItem.Cost(itemAmount);
       Assert.AreEqual(0, cost);
     }
   }

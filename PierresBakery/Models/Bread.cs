@@ -2,13 +2,16 @@ namespace PierresBakery.Models
 {
   public class Bread : Item
   {
-    public static new readonly int Price = 2;
+    public override int Price { get; init; }
 
-    public Bread(string name, int amount) : base(name, amount) {}
-
-    public static new int Cost(int amount)
+    public Bread(string name, int amount) : base(name, amount)
     {
-      return ((amount / 3) * 5) + ((amount % 3) * Price);
+      Price = 5;
+    }
+
+    public override int Cost(int amount)
+    {
+      return (amount - amount / 3) * Price;
     }
   }
 }

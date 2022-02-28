@@ -8,8 +8,7 @@ namespace PierresBakery
 {
   public class Program
   {
-    private static List<Bread> DaysBread = new List<Bread>();
-    private static List<Pastry> DaysPastries = new List<Pastry>();
+    private static List<Item> Inventory = new List<Item>();
 
     private static Dictionary<string, string> Messages = 
       new Dictionary<string, string>()
@@ -34,17 +33,18 @@ namespace PierresBakery
     |                  Thanks for stopping by!                      |
     |                                                               |
     +===============================================================+
-" }
+" },
+        {      "makesense", "PIERRE> You aren't making any sense right now!\n" },
+        {   "itemnotfound", "PIERRE> I can't find that item!\n" },
+        { "notenoughitems", "PIERRE> I don't even have that many in stock right now!\n" },
       };
 
     private static void BuildBakery()
     {
-      DaysBread.AddRange(new List<Bread> {
+      Inventory.AddRange(new List<Item> {
         new Bread("pan francés", 10),
         new Bread("pan de muerto", 5),
         new Bread("pan de yema", 7),
-      });
-      DaysPastries.AddRange(new List<Pastry> {
         new Pastry("concha", 15),
         new Pastry("gallina", 20),
         new Pastry("empanada (pumpkin)", 8),
@@ -53,28 +53,20 @@ namespace PierresBakery
 
     private static void DisplayOptions()
     {
-      Console.WriteLine("  $5/ea for Bread, and $2/ea for Pastries");
-      for (int i = 0; i < DaysBread.Count; i++)
+      for (int i = 0; i < Inventory.Count; i++)
       {
-        if (DaysBread[i].Amount == 0)
+        if (Inventory[i].Amount == 0)
         {
           continue;
         }
-        Console.WriteLine("{0,7} {1} ({2}x)", "["+i+"]", DaysBread[i].Name, DaysBread[i].Amount);
-      }
-      for (int i = 0, z = DaysBread.Count; i < DaysPastries.Count; i++)
-      {
-        if (DaysPastries[i].Amount == 0)
-        {
-          continue;
-        }
-        int y = i+z;
-        Console.WriteLine("{0,7} {1} ({2}x)", "["+y+"]", DaysPastries[i].Name, DaysPastries[i].Amount);
+        Console.WriteLine("{0,7} {1} ({2}x)", "["+i+"]",
+          Inventory[i].Name,
+          Inventory[i].Amount);
       }
     }
 
-    private static Dictionary<string, int> ParseUserSelection(
-      Dictionary<string, int> Order,
+    private static Dictionary<Item, int> ParseUserSelection(
+      Dictionary<Item, int> Order,
       string choice,
       string amount)
     {
@@ -83,83 +75,54 @@ namespace PierresBakery
 
       if (!cTest || !aTest || c < 0 || a < 1)
       {
-        Console.WriteLine("PIERRE: You aren't making any sense right now!\n");
+        Console.WriteLine(Messages["makesense"]);
         return Order;
       }
 
-      if (c > DaysBread.Count + DaysPastries.Count)
+      if (c > Inventory.Count)
       {
-        Console.WriteLine("PIERRE: Unable to find that item. Please try again!\n");
+        Console.WriteLine(Messages["itemnotfound"]);
         return Order;
       }
 
-      if (c >= DaysBread.Count)
+      bool result = Inventory[c].Sell(a);
+
+      if (!result)
       {
-        c -= DaysBread.Count;
-        bool result = Pastry.SellPastry(DaysPastries[c].Name, a);
-
-        if (!result)
-        {
-          Console.WriteLine("PIERRE: Unable to find that item, or sell that amount. Please try again!\n");
-          return Order;
-        }
-
-        Order[DaysPastries[c].Name] = a;
-        Order["_total"] += Pastry.GetCost(a);
+        Console.WriteLine(Messages["notenoughitems"]);
+        return Order;
       }
-      else
-      {
-        bool result = Bread.SellBread(DaysBread[c].Name, a);
 
-        if (!result)
-        {
-          Console.WriteLine("PIERRE: Unable to find that item, or sell that amount. Please try again!\n");
-          return Order;
-        }
+      Order[Inventory[c]] = a;
 
-        Order[DaysBread[c].Name] = a;
-        Order["_total"] += Bread.GetCost(a);
-      }
       return Order;
     }
 
-    private static void DisplayOrderTotal(Dictionary<string, int> Order)
+    private static void DisplayOrderTotal(Dictionary<Item, int> Order)
     {
       int fullTotal = 0;
+      int discountedTotal = 0;
 
       Console.Write("\n");
       Console.WriteLine("{0,4}  {1,-20}  {2}", "Count", "Item Name", "Total");
+
       foreach (var key in Order.Keys)
       {
-        if (key == "_total")
-        {
-          continue;
-        }
-        if (IsItemBread(key))
-        {
-          fullTotal += Order[key] * Bread.Price;
-          Console.WriteLine("{0,4}x  {1,-20}  ${2}", Order[key], key, Bread.GetCost(Order[key]));
-        }
-        else
-        {
-          fullTotal += Order[key] * Pastry.Price;
-          Console.WriteLine("{0,4}x  {1,-20}  ${2}", Order[key], key, Pastry.GetCost(Order[key]));
-        }
+        fullTotal += Order[key] * key.Price;
+        discountedTotal += key.Cost(Order[key]);
+
+        Console.WriteLine("{0,4}x  {1,-20}  ${2}", Order[key], key.Name, key.Cost(Order[key]));
       }
+
       Console.WriteLine("".PadLeft(35, '-'));
       Console.WriteLine("{0,32}", "Full Price: $"+fullTotal);
-      Console.WriteLine("{0,32}", "w/ Discount: $"+Order["_total"]);
+      Console.WriteLine("{0,32}", "w/ Discount: $"+discountedTotal);
       Console.Write("\n");
-    }
-
-    private static bool IsItemBread(string name)
-    {
-      return Bread.GetBreads().Any(item => item.Name == name);
     }
 
     public static void Main()
     {
-      var Order = new Dictionary<string, int>() { { "_total", 0 } };
+      var Order = new Dictionary<Item, int>();
 
       BuildBakery();
 
