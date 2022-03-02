@@ -93,7 +93,7 @@ namespace PierresBakery
         return Order;
       }
 
-      Order[Inventory[c]] = a;
+      Order[Inventory[c]] = (Order.ContainsKey(Inventory[c])) ? Order[Inventory[c]] + a : a;
 
       return Order;
     }
