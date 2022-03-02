@@ -104,8 +104,7 @@ namespace PierresBakery
           return Order;
         }
 
-        Order[DaysPastries[c].Name] = a;
-        Order["_total"] += Pastry.GetCost(a);
+        Order[DaysPastries[c].Name] = (Order.ContainsKey(DaysPastries[c].Name)) ? Order[DaysPastries[c].Name] + a : a;
       }
       else
       {
@@ -117,38 +116,40 @@ namespace PierresBakery
           return Order;
         }
 
-        Order[DaysBread[c].Name] = a;
-        Order["_total"] += Bread.GetCost(a);
+        Order[DaysBread[c].Name] = (Order.ContainsKey(DaysBread[c].Name)) ? Order[DaysBread[c].Name] + a : a;
       }
       return Order;
     }
 
     private static void DisplayOrderTotal(Dictionary<string, int> Order)
     {
+      int discTotal = 0;
       int fullTotal = 0;
 
       Console.Write("\n");
       Console.WriteLine("{0,4}  {1,-20}  {2}", "Count", "Item Name", "Total");
+
       foreach (var key in Order.Keys)
       {
-        if (key == "_total")
-        {
-          continue;
-        }
         if (IsItemBread(key))
         {
           fullTotal += Order[key] * Bread.Price;
+          discTotal += Bread.GetCost(Order[key]);
+
           Console.WriteLine("{0,4}x  {1,-20}  ${2}", Order[key], key, Bread.GetCost(Order[key]));
         }
         else
         {
           fullTotal += Order[key] * Pastry.Price;
+          discTotal += Pastry.GetCost(Order[key]);
+
           Console.WriteLine("{0,4}x  {1,-20}  ${2}", Order[key], key, Pastry.GetCost(Order[key]));
         }
       }
+
       Console.WriteLine("".PadLeft(35, '-'));
       Console.WriteLine("{0,32}", "Full Price: $"+fullTotal);
-      Console.WriteLine("{0,32}", "w/ Discount: $"+Order["_total"]);
+      Console.WriteLine("{0,32}", "w/ Discount: $"+discTotal);
       Console.Write("\n");
     }
 
@@ -159,7 +160,7 @@ namespace PierresBakery
 
     public static void Main()
     {
-      var Order = new Dictionary<string, int>() { { "_total", 0 } };
+      var Order = new Dictionary<string, int>();
 
       BuildBakery();
 
@@ -168,10 +169,12 @@ namespace PierresBakery
       while (true)
       {
         DisplayOptions();
+
         Console.WriteLine("\n\tType 'F' to finish your order!");
         Console.WriteLine("\tType 'T' to view your running total!");
         Console.WriteLine("\tType 'Q' to exit!");
         Console.Write("\nWhat item would you like? >>> ");
+
         string choice = Console.ReadLine();
 
         if (choice == "q" || choice == "Q")
